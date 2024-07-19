@@ -5,6 +5,7 @@ import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
+import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,7 +27,7 @@ public class King extends Piece{
                isEighthColumnExclusion(this.piecePosition, currentCandidateOffset)){
                 continue;
             }
-            if(!BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)){
+            if(BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)){
                 final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
                 if (!candidateDestinationTile.isTileOccupied()){
                     legalMoves.add(new Move.MajorMove(board, this , candidateDestinationCoordinate));
@@ -40,8 +41,13 @@ public class King extends Piece{
             }
         }
 
-        return legalMoves;
+        return ImmutableList.copyOf(legalMoves);
     }
+    @Override
+    public String toString() {
+        return PieceType.KING.toString();
+    }
+
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset){
         return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -9 || candidateOffset == -1 || candidateOffset == 7);
     }

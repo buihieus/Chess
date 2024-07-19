@@ -1,6 +1,8 @@
 package com.chess.engine.board;
 
 import com.chess.engine.pieces.Piece;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +18,7 @@ public abstract class Tile {
             emptyTileMap.put(i, new EmptyTile(i));
         }
 
-        return emptyTileMap;
+        return ImmutableMap.copyOf(emptyTileMap);
     }
 
     private Tile(int tileCoordinate){
@@ -41,6 +43,10 @@ public abstract class Tile {
         public Piece getPiece(){
             return null;
         }
+        @Override
+        public String toString(){
+            return "-";
+        }
     }
     public static final class OccupiedTile extends Tile{
         private final Piece pieceOnTile;
@@ -55,6 +61,10 @@ public abstract class Tile {
         @Override
         public Piece getPiece(){
             return this.pieceOnTile;
+        }
+        @Override
+        public String toString(){
+            return getPiece().getPieceAlliance().isBlack() ? getPiece().toString().toLowerCase() : getPiece().toString();
         }
     }
 }

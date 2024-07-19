@@ -5,6 +5,7 @@ import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
+import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,6 +30,9 @@ public class Bishop extends Piece{
                 }
 
                 candidateDestinationCoordinate += candidateCoordinateOffset;
+                if (!BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
+                    break;
+                }
                 final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
                 if (!candidateDestinationTile.isTileOccupied()){
                     legalMoves.add(new Move.MajorMove(board, this , candidateDestinationCoordinate));
@@ -42,8 +46,14 @@ public class Bishop extends Piece{
                 }
             }
         }
-        return legalMoves;
+        return ImmutableList.copyOf(legalMoves);
     }
+
+    @Override
+    public String toString() {
+        return PieceType.BISHOP.toString();
+    }
+
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset){
         return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -9 || candidateOffset == 7);
     }
