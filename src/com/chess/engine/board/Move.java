@@ -12,9 +12,20 @@ public abstract class Move {
         this.piece = piece;
         this.destinationCoordinate = destinationCoordinate;
     }
+
+    public int getDestinationCoordinate(){
+        return this.destinationCoordinate;
+    }
+
+    public abstract Board excecute();
+
     public static final class MajorMove extends Move {
         public MajorMove(final Board board, final Piece piece, final int destinationCoordinate) {
             super(board, piece, destinationCoordinate);
+        }
+        @Override
+        public Board excecute(){
+            return null;
         }
     }
     public static final class AttackMove extends Move{
@@ -22,6 +33,11 @@ public abstract class Move {
         public AttackMove(final Board board, final Piece piece, final int destinationCoordinate, final Piece attckedPiece) {
             super(board, piece, destinationCoordinate);
             this.attackedPiece = attckedPiece;
+        }
+
+        @Override
+        public Board excecute() {
+            return null;
         }
     }
 }
