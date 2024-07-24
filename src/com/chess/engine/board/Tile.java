@@ -21,6 +21,10 @@ public abstract class Tile {
         return ImmutableMap.copyOf(emptyTileMap);
     }
 
+    public int getTileCoordinate() {
+        return this.tileCoordinate;
+    }
+
     private Tile(int tileCoordinate){
         this.tileCoordinate = tileCoordinate;
     }
