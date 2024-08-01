@@ -25,7 +25,7 @@ public abstract class Tile {
         return this.tileCoordinate;
     }
 
-    private Tile(int tileCoordinate){
+    private Tile(final int tileCoordinate){
         this.tileCoordinate = tileCoordinate;
     }
 

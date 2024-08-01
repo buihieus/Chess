@@ -54,7 +54,7 @@ public class Board {
     }
 
     public Player currentPlayer() {
-        return currentPlayer;
+        return this.currentPlayer;
     }
 
     public Collection<Piece> getBlackPieces(){
@@ -69,15 +69,15 @@ public class Board {
         return tile.toString();
     }
 
-    private Collection<Move> calculateLegalMoves(Collection<Piece> pieces) {
+    private Collection<Move> calculateLegalMoves(final Collection<Piece> pieces) {
         final List<Move> legalMoves = new ArrayList<>();
         for(final Piece piece : pieces){
             legalMoves.addAll(piece.calculateLegalMoves(this));
         }
-        return legalMoves;
+        return ImmutableList.copyOf(legalMoves);
     }
 
-    private static Collection<Piece> calculateActivePieces(List<Tile> gameBoard, Alliance alliance) {
+    private static Collection<Piece> calculateActivePieces(final List<Tile> gameBoard, final Alliance alliance) {
         final List<Piece> activePieces = new ArrayList<>();
         for(final Tile tile : gameBoard){
             if (tile.isTileOccupied()){
@@ -87,7 +87,7 @@ public class Board {
                 }
             }
         }
-        return activePieces;
+        return ImmutableList.copyOf(activePieces);
     }
 
     private static List<Tile> createGameBoard(final Builder builder){
@@ -153,6 +153,7 @@ public class Board {
         Map<Integer, Piece> boardConfig;
         Alliance nextMoveMaker;
         private Pawn enPassantPawn;
+        Move transitionMove;
 
         public Builder(){
             this.boardConfig = new HashMap<>();
@@ -174,6 +175,11 @@ public class Board {
 
         public void setEnPassantPawn(Pawn enPassantPawn) {
             this.enPassantPawn = enPassantPawn;
+        }
+
+        public Builder setMoveTransition(final Move transitionMove){
+            this.transitionMove = transitionMove;
+            return this;
         }
     }
 }

@@ -26,11 +26,11 @@ public abstract class Player {
     }
 
     public King getPlayerKing() {
-        return playerKing;
+        return this.playerKing;
     }
 
     public Collection<Move> getLegalMoves() {
-        return legalMoves;
+        return this.legalMoves;
     }
 
     public static Collection<Move> calculateAttackOnTile(int piecePosition, Collection<Move> moves){
