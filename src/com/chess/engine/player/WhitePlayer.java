@@ -40,14 +40,14 @@ public class WhitePlayer extends Player {
                 final Tile rookTile = this.board.getTile(63);
                 if(rookTile.isTileOccupied() && rookTile.getPiece().isFirstMove()){
                     if(Player.calculateAttackOnTile(61, opponentLegals).isEmpty() && rookTile.getPiece().getPieceType().isRook()) {
-                        kingCastles.add(new Move.KingSideCastleMove(this.board, this.playerKing, 62, (Rook)rookTile.getPiece(), rookTile.getTileCoordinate(), 61));
+                        kingCastles.add(new Move.PawnMove.KingSideCastleMove(this.board, this.playerKing, 62, (Rook)rookTile.getPiece(), rookTile.getTileCoordinate(), 61));
                     }
                 }
             }
             if(!this.board.getTile(59).isTileOccupied() && !this.board.getTile(58).isTileOccupied() && !this.board.getTile(57).isTileOccupied()){
                 final Tile rookTile = this.board.getTile(56);
                 if(rookTile.isTileOccupied() && rookTile.getPiece().isFirstMove() && Player.calculateAttackOnTile(58, opponentLegals).isEmpty() && Player.calculateAttackOnTile(59, opponentLegals).isEmpty() && rookTile.getPiece().getPieceType().isRook()){
-                    kingCastles.add(new Move.QueenSideCastleMove(this.board, this.playerKing, 58, (Rook)rookTile.getPiece(), rookTile.getTileCoordinate(), 59));
+                    kingCastles.add(new Move.PawnMove.QueenSideCastleMove(this.board, this.playerKing, 58, (Rook)rookTile.getPiece(), rookTile.getTileCoordinate(), 59));
                 }
             }
         }
